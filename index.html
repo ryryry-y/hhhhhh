@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple POS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 10px;
+    }
+
+    h1 {
+      font-size: 26px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    button {
+      padding: 18px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #4CAF50;
+      color: white;
+      width: 100%;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .box {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 15px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🍹 Simple POS System</h1>
+
+<div class="grid">
+
+  <button onclick="add('mango12')">Mango Shake (12oz) - ₱60</button>
+  <button onclick="add('mango16')">Mango Shake (16oz) - ₱70</button>
+
+  <button onclick="add('melon12')">Melon Shake (12oz) - ₱60</button>
+  <button onclick="add('melon16')">Melon Shake (16oz) - ₱70</button>
+
+  <button onclick="add('straw12')">Strawberry Shake (12oz) - ₱60</button>
+  <button onclick="add('straw16')">Strawberry Shake (16oz) - ₱70</button>
+
+  <button onclick="add('water12')">Watermelon Shake (12oz) - ₱60</button>
+  <button onclick="add('water16')">Watermelon Shake (16oz) - ₱70</button>
+
+  <button onclick="add('siomai')">Siomai - ₱40</button>
+  <button onclick="add('fries')">Fries - ₱30</button>
+  <button onclick="add('hungarian')">Hungarian - ₱70</button>
+  <button onclick="add('cheeseBurger')">Cheese Burger - ₱70</button>
+  <button onclick="add('quarter')">Quarter Pounder - ₱90</button>
+  <button onclick="add('dynamite')">Dynamite - ₱60</button>
+  <button onclick="add('cheeseStick')">Cheese Stick - ₱30</button>
+
+</div>
+
+<div class="box">
+  <h3>📊 Sales Count</h3>
+  <div id="output"></div>
+</div>
+
+<div class="box">
+  <h3>💰 Total Sales</h3>
+  ₱<span id="total">0</span>
+</div>
+
+<script>
+const prices = {
+  mango12: 60,
+  mango16: 70,
+  melon12: 60,
+  melon16: 70,
+  straw12: 60,
+  straw16: 70,
+  water12: 60,
+  water16: 70,
+  siomai: 40,
+  fries: 30,
+  hungarian: 70,
+  cheeseBurger: 70,
+  quarter: 90,
+  dynamite: 60,
+  cheeseStick: 30
+};
+
+const sales = {};
+
+function add(item) {
+  if (!sales[item]) sales[item] = 0;
+
+  sales[item]++;
+
+  update();
+}
+
+function update() {
+  let total = 0;
+  let text = "";
+
+  for (let item in sales) {
+    total += sales[item] * prices[item];
+    text += `${item}: ${sales[item]}<br>`;
+  }
+
+  document.getElementById("output").innerHTML = text || "No sales yet";
+  document.getElementById("total").innerText = total;
+}
+</script>
+
+</body>
+</html>
