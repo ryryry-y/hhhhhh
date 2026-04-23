@@ -61,7 +61,7 @@
 
 <hr>
 
-<!-- PRODUCT BUTTONS -->
+<!-- PRODUCTS -->
 
 <button onclick="add('mango12')">Mango Shake 12oz - ₱60</button>
 <button onclick="add('mango16')">Mango Shake 16oz - ₱70</button>
@@ -75,7 +75,9 @@
 <button onclick="add('water12')">Watermelon Shake 12oz - ₱60</button>
 <button onclick="add('water16')">Watermelon Shake 16oz - ₱70</button>
 
-<button onclick="add('siomai')">Siomai - ₱40</button>
+<button onclick="add('siomaiSmall')">Siomai (Small) - ₱40</button>
+<button onclick="add('siomaiBig')">Siomai (Big) - ₱40</button>
+
 <button onclick="add('fries')">Fries - ₱30</button>
 <button onclick="add('hungarian')">Hungarian - ₱70</button>
 <button onclick="add('cheeseBurger')">Cheese Burger - ₱70</button>
@@ -101,22 +103,27 @@ const prices = {
   melon12: 60, melon16: 70,
   straw12: 60, straw16: 70,
   water12: 60, water16: 70,
-  siomai: 40, fries: 30,
-  hungarian: 70, cheeseBurger: 70,
-  quarter: 90, dynamite: 60,
+  siomaiSmall: 40,
+  siomaiBig: 40,
+  fries: 30,
+  hungarian: 70,
+  cheeseBurger: 70,
+  quarter: 90,
+  dynamite: 60,
   cheeseStick: 30
 };
 
 const names = {
-  mango12: "Mango 12oz",
-  mango16: "Mango 16oz",
-  melon12: "Melon 12oz",
-  melon16: "Melon 16oz",
-  straw12: "Strawberry 12oz",
-  straw16: "Strawberry 16oz",
-  water12: "Watermelon 12oz",
-  water16: "Watermelon 16oz",
-  siomai: "Siomai",
+  mango12: "Mango Shake (12oz)",
+  mango16: "Mango Shake (16oz)",
+  melon12: "Melon Shake (12oz)",
+  melon16: "Melon Shake (16oz)",
+  straw12: "Strawberry Shake (12oz)",
+  straw16: "Strawberry Shake (16oz)",
+  water12: "Watermelon Shake (12oz)",
+  water16: "Watermelon Shake (16oz)",
+  siomaiSmall: "Siomai (Small)",
+  siomaiBig: "Siomai (Big)",
   fries: "Fries",
   hungarian: "Hungarian",
   cheeseBurger: "Cheese Burger",
@@ -130,10 +137,8 @@ let history = [];
 
 function add(item) {
   if (!sales[item]) sales[item] = 0;
-
   sales[item]++;
   history.push(item);
-
   update();
 }
 
@@ -143,9 +148,7 @@ function undo() {
   let last = history.pop();
   sales[last]--;
 
-  if (sales[last] <= 0) {
-    delete sales[last];
-  }
+  if (sales[last] <= 0) delete sales[last];
 
   update();
 }
